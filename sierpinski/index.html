@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)http://www.mobilefish.com/scripts/webgl/examples/gasket2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>2D Sierpinski Gasket</title>
+
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+
+void
+main()
+{
+    gl_Position = vPosition;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+
+void
+main()
+{
+    gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+}
+</script>
+
+<script type="text/javascript" src="./js/webgl-utils.js"></script>
+<script type="text/javascript" src="./js/initShaders.js"></script>
+<script type="text/javascript" src="./js/MV.js"></script>
+<script type="text/javascript" src="./js/gasket2.js"></script>
+<script type="text/javascript" async="" src="./2D Sierpinski Gasket_files/request"></script></head>   
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Browser tidak mendukung html5
+</canvas>
+
+</body></html>

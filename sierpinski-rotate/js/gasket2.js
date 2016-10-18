@@ -5,7 +5,9 @@ var gl;
 
 var points = [];
 
-var NumTimesToSubdivide = 2;
+var NumTimesToSubdivide = 4;
+var theta = 0.0;
+var thetaLoc;
 
 window.onload = function init()
 {
@@ -21,9 +23,9 @@ window.onload = function init()
     // First, initialize the corners of our gasket with three points.
 
     var vertices = [
-        vec2( -1, -1 ),
-        vec2(  0,  1 ),
-        vec2(  1, -1 )
+        vec2( -0.5, -0.5 ),
+        vec2(  0,  0.5 ),
+        vec2(  0.5, -0.5 )
     ];
 
     divideTriangle( vertices[0], vertices[1], vertices[2],
@@ -38,6 +40,8 @@ window.onload = function init()
     //  Load shaders and initialize attribute buffers
 
     var program = initShaders( gl, "vertex-shader", "fragment-shader" );
+   
+    
     gl.useProgram( program );
 
     // Load the data into the GPU
@@ -47,13 +51,13 @@ window.onload = function init()
     gl.bufferData( gl.ARRAY_BUFFER, flatten(points), gl.STATIC_DRAW );
 
     // Associate out shader variables with our data buffer
-
+	
     var vPosition = gl.getAttribLocation( program, "vPosition" );
     gl.vertexAttribPointer( vPosition, 2, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( vPosition );
-
+	thetaLoc = gl.getUniformLocation(program, "theta");
     render();
-};
+}
 
 function triangle( a, b, c )
 {
@@ -88,6 +92,12 @@ function divideTriangle( a, b, c, count )
 
 function render()
 {
-    gl.clear( gl.COLOR_BUFFER_BIT );
-    gl.drawArrays( gl.TRIANGLES, 0, points.length );
+		gl.clear(gl.COLOR_BUFFER_BIT);
+		theta += 0.1;
+		gl.uniform1f(thetaLoc, theta);
+		gl.drawArrays( gl.TRIANGLES, 0, points.length );
+		requestAnimFrame(render);	
+
 }
+
+

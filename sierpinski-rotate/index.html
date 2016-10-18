@@ -7,19 +7,21 @@
 
 <script id="vertex-shader" type="x-shader/x-vertex">
 attribute vec4 vPosition;
+uniform float theta;
 
-void
-main()
+void main()
 {
-    gl_Position = vPosition;
+    gl_Position.x = -sin(theta) * vPosition.x + cos(theta) * vPosition.y;
+    gl_Position.y = sin(theta) * vPosition.y + cos(theta) * vPosition.x;
+    gl_Position.z = 0.0;
+    gl_Position.w = 1.0;
 }
 </script>
 
 <script id="fragment-shader" type="x-shader/x-fragment">
 precision mediump float;
 
-void
-main()
+void main()
 {
     gl_FragColor = vec4( 1.0, 0.0, 1.0, 1.0 );
 }
@@ -29,7 +31,7 @@ main()
 <script type="text/javascript" src="./js/initShaders.js"></script>
 <script type="text/javascript" src="./js/MV.js"></script>
 <script type="text/javascript" src="./js/gasket2.js"></script>
-<script type="text/javascript" async="" src="./2D Sierpinski Gasket_files/request"></script></head>   
+</head>   
 
 <body>
 <canvas id="gl-canvas" width="512" height="512">
